@@ -129,31 +129,31 @@
             z-index: 1;
         }
         
-        .video-placeholder {
+        .video-frame {
             width: 100%;
-            height: 300px;
-            background: linear-gradient(45deg, #1a4d1a, #2d5016);
+            height: 400px;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
             border: 2px solid rgba(74, 124, 89, 0.5);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 20px;
         }
         
-        .video-placeholder::before {
-            content: '▶';
-            font-size: 4rem;
-            color: #4a7c59;
-            text-shadow: 0 0 20px rgba(74, 124, 89, 0.8);
-            animation: pulse 2s infinite;
+        .video-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a7c59, #5d8a6b);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.5);
         }
         
         .video-info {
@@ -239,26 +239,6 @@
             box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
         }
         
-        .user-input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(74, 124, 89, 0.5);
-            border-radius: 8px;
-            color: #e8f5e8;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            resize: vertical;
-            min-height: 80px;
-            font-family: 'Crimson Text', serif;
-        }
-        
-        .user-input:focus {
-            outline: none;
-            border-color: #4a7c59;
-            box-shadow: 0 0 15px rgba(74, 124, 89, 0.4);
-        }
-        
         .button {
             background: linear-gradient(135deg, #4a7c59, #5d8a6b);
             color: white;
@@ -336,6 +316,23 @@
             font-weight: 600;
             border: 1px solid rgba(74, 124, 89, 0.3);
         }
+
+        .video-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            background: rgba(255, 193, 7, 0.2);
+            border: 2px solid rgba(255, 193, 7, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #fff3cd;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -357,13 +354,24 @@
         <div id="interview-container">
             <div class="video-container">
                 <h3 class="video-title" id="video-title">Clip 1: Situación de Antirol</h3>
-                <iframe id="video-frame" width="100%" height="300" 
+                
+                <div class="alert">
+                    ⚠️ Si el video no se reproduce correctamente, usa el enlace directo de YouTube
+                </div>
+                
+                <iframe id="video-frame" class="video-frame"
                         src="" 
                         frameborder="0" 
-                        allowfullscreen
-                        style="border-radius: 10px; border: 2px solid rgba(74, 124, 89, 0.5);">
+                        allowfullscreen>
                 </iframe>
-                <p class="video-info">Observa atentamente la situación y responde qué SITUACION antirol se presenta </p>
+                
+                <div class="video-options">
+                    <a id="video-link" href="#" target="_blank" class="video-link">
+                        🎥 Ver video en YouTube (Nueva pestaña)
+                    </a>
+                </div>
+                
+                <p class="video-info">Observa atentamente la situación y responde qué SITUACION antirol se presenta</p>
                 
                 <div class="answer-section">
                     <div class="answer-label">Respuesta Correcta:</div>
@@ -386,8 +394,8 @@
         
         <div id="completion-screen" class="completion-screen hidden">
             <h2>🎭 Entrevista finalizada</h2>
-            <p>todas las situaciones fueron presentadas.</p>
-            <p>El entrevistador decidira el resultado final.</p>
+            <p>Todas las situaciones fueron presentadas.</p>
+            <p>El entrevistador decidirá el resultado final.</p>
             <button class="button" onclick="restartInterview()">Reiniciar Entrevista</button>
         </div>
     </div>
@@ -396,42 +404,61 @@
         const questions = [
             {
                 title: "Clip 1: Situacion 1",
+                videoId: "jyM58b80DJU",
                 videoUrl: "https://youtu.be/jyM58b80DJU?si=CVvGvYYQg0n3Xk1J",
-                answer: "PG + MG + TOXIQUEAR CUERPO + ROLEAR CON CIVILES"            },
+                answer: "PG + MG + TOXIQUEAR CUERPO + ROLEAR CON CIVILES"
+            },
             {
                 title: "Clip 2: Situacion 2",
+                videoId: "TCUH-GU9zPA",
                 videoUrl: "https://youtu.be/TCUH-GU9zPA?si=lpZAuiBzsoGRyoIt",
-                answer: "PG + VDM"            },
+                answer: "PG + VDM"
+            },
             {
                 title: "Clip 3: Situacion 3",
+                videoId: "OfAxh3vMFEo",
                 videoUrl: "https://youtu.be/OfAxh3vMFEo?si=xan5QygKOYmMpUy4", 
-                answer: "EVADIR ROL"            },
+                answer: "EVADIR ROL"
+            },
             {
                 title: "Clip 4: Situacion 4",
+                videoId: "FusHxl_gxoA",
                 videoUrl: "https://youtu.be/FusHxl_gxoA?si=Tk97PYoWGSjOuDKG", 
-                answer: "DM + FORZAR ROL"            },
+                answer: "DM + FORZAR ROL"
+            },
             {
                 title: "Clip 5: Situacion 5",
+                videoId: "GLBRRZddr08",
                 videoUrl: "https://youtu.be/GLBRRZddr08?si=nGGi1jwoSDGNtQkn",
-                answer: "CACHEO INAPROPIADO"            },
+                answer: "CACHEO INAPROPIADO"
+            },
             {
                 title: "Clip 6: Situacion 6",
+                videoId: "JEsSzhiXHlM",
                 videoUrl: "https://youtu.be/JEsSzhiXHlM?si=KK_I2KGO9tG30jYD", 
-                answer: "ROLEAR CON CIVILES"            },
+                answer: "ROLEAR CON CIVILES"
+            },
             {
                 title: "Clip 7: Situacion 7",
+                videoId: "4i6Jbx2gKgI",
                 videoUrl: "https://youtu.be/4i6Jbx2gKgI?si=STajgVpGqOccv-Zy", 
-                answer: "TOXIQUEAR CUERPO + DM"            },
+                answer: "TOXIQUEAR CUERPO + DM"
+            },
             {
                 title: "Clip 8: Situacion 8",
+                videoId: "YwE0dYtzelE",
                 videoUrl: "https://youtu.be/YwE0dYtzelE?si=u7SvYettrLGsB69H", 
-                answer: "NRRDE + DM"            },
+                answer: "NRRDE + DM"
+            },
             {
                 title: "Clip 9: Situacion 9",
+                videoId: "-zaQX3M1Tlk",
                 videoUrl: "https://youtu.be/-zaQX3M1Tlk?si=3cQ4bJwNp9gR4rFb", 
-                answer: "DM MASIVO + NRRDE + METERSE EN ROL AJENO"            },
+                answer: "DM MASIVO + NRRDE + METERSE EN ROL AJENO"
+            },
             {
                 title: "Clip 10: Situacion 10",
+                videoId: "AW52H9EZoI4",
                 videoUrl: "https://youtu.be/AW52H9EZoI4?si=x2h5nUJJv_0h7xm0", 
                 answer: "CACHEAR SIN VESTIMENTA DE MAFIA"
             }
@@ -446,13 +473,23 @@
             document.getElementById('current-question').textContent = currentQuestion + 1;
         }
         
+        function convertToEmbedUrl(videoId) {
+            return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&showinfo=0`;
+        }
+        
         function loadQuestion() {
             const question = questions[currentQuestion];
             document.getElementById('video-title').textContent = question.title;
             document.getElementById('answer-content').textContent = question.answer;
             
-            document.getElementById('video-frame').src = question.videoUrl;
+            // Configurar iframe con URL de embed
+            const embedUrl = convertToEmbedUrl(question.videoId);
+            document.getElementById('video-frame').src = embedUrl;
             
+            // Configurar enlace directo
+            document.getElementById('video-link').href = question.videoUrl;
+            
+            // Resetear estado de respuesta
             document.getElementById('correct-answer').classList.remove('revealed');
             document.getElementById('censored-overlay').style.display = 'flex';
             document.getElementById('reveal-btn').disabled = false;
@@ -478,7 +515,6 @@
             currentQuestion++;
             
             if (currentQuestion >= questions.length) {
-
                 document.getElementById('interview-container').classList.add('hidden');
                 document.getElementById('completion-screen').classList.remove('hidden');
                 document.getElementById('progress-fill').style.width = '100%';
@@ -494,8 +530,16 @@
             loadQuestion();
         }
         
+        // Detectar si el iframe falla al cargar
+        document.getElementById('video-frame').addEventListener('error', function() {
+            console.log('Error loading video iframe');
+        });
+        
+        // Inicializar
         document.getElementById('total-questions').textContent = questions.length;
         loadQuestion();
     </script>
+</body>
+</html>
 </body>
 </html>
