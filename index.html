@@ -396,44 +396,44 @@
         const questions = [
             {
                 title: "Clip 1: Situacion 1",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/jyM58b80DJU",
+                answer: "PG + MG + TOXIQUEAR CUERPO + ROLEAR CON CIVILES"            },
             {
                 title: "Clip 2: Situacion 2",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/TCUH-GU9zPA",
+                answer: "PG + VDM"            },
             {
                 title: "Clip 3: Situacion 3",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/OfAxh3vMFEo", 
+                answer: "EVADIR ROL"            },
             {
                 title: "Clip 4: Situacion 4",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/FusHxl_gxoA", 
+                answer: "DM + FORZAR ROL"            },
             {
                 title: "Clip 5: Situacion 5",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/GLBRRZddr08",
+                answer: "CACHEO INAPROPIADO"            },
             {
                 title: "Clip 6: Situacion 6",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/JEsSzhiXHlM", 
+                answer: "ROLEAR CON CIVILES"            },
             {
                 title: "Clip 7: Situacion 7",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/4i6Jbx2gKgI", 
+                answer: "TOXIQUEAR CUERPO + DM"            },
             {
                 title: "Clip 8: Situacion 8",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/YwE0dYtzelE", 
+                answer: "NRRDE + DM"            },
             {
                 title: "Clip 9: Situacion 9",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"            },
+                videoUrl: "https://youtu.be/-zaQX3M1Tlk", 
+                answer: "DM MASIVO + NRRDE + METERSE EN ROL AJENO"            },
             {
                 title: "Clip 10: Situacion 10",
-                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
-                answer: "Agrega aquí la respuesta del clip 1"
+                videoUrl: "https://youtu.be/AW52H9EZoI4", 
+                answer: "CACHEAR SIN VESTIMENTA DE MAFIA"
             }
         ];
         
@@ -451,10 +451,8 @@
             document.getElementById('video-title').textContent = question.title;
             document.getElementById('answer-content').textContent = question.answer;
             
-            // Update video source
             document.getElementById('video-frame').src = question.videoUrl;
             
-            // Reset censorship
             document.getElementById('correct-answer').classList.remove('revealed');
             document.getElementById('censored-overlay').style.display = 'flex';
             document.getElementById('reveal-btn').disabled = false;
@@ -480,7 +478,7 @@
             currentQuestion++;
             
             if (currentQuestion >= questions.length) {
-                // Show completion screen
+
                 document.getElementById('interview-container').classList.add('hidden');
                 document.getElementById('completion-screen').classList.remove('hidden');
                 document.getElementById('progress-fill').style.width = '100%';
@@ -496,7 +494,6 @@
             loadQuestion();
         }
         
-        // Initialize
         document.getElementById('total-questions').textContent = questions.length;
         loadQuestion();
     </script>
