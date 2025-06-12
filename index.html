@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Sicilia - Postulaciones</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #0a2e0a, #1a4d1a, #2d5016);
+            min-height: 100vh;
+            color: #e8f5e8;
+            overflow-x: hidden;
+        }
+        
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #4a7c59 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #5d8a6b 0%, transparent 50%);
+            background-size: 100px 100px;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #4a7c59, transparent);
+        }
+        
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4a7c59;
+            text-shadow: 0 0 20px rgba(74, 124, 89, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #9cb3a3;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(74, 124, 89, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a7c59, #5d8a6b);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(74, 124, 89, 0.6);
+        }
+        
+        .video-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(74, 124, 89, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 124, 89, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .video-container:hover::before {
+            left: 100%;
+        }
+        
+        .video-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #4a7c59;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #1a4d1a, #2d5016);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 2px solid rgba(74, 124, 89, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-placeholder::before {
+            content: '▶';
+            font-size: 4rem;
+            color: #4a7c59;
+            text-shadow: 0 0 20px rgba(74, 124, 89, 0.8);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .video-info {
+            font-size: 1.1rem;
+            color: #b8d4c0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .answer-section {
+            background: rgba(74, 124, 89, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(74, 124, 89, 0.3);
+        }
+        
+        .answer-label {
+            font-size: 1.2rem;
+            color: #4a7c59;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .answer-label::before {
+            content: '📝';
+            font-size: 1.5rem;
+        }
+        
+        .censored-answer {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            border: 2px dashed rgba(74, 124, 89, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .censored-answer.revealed {
+            background: rgba(74, 124, 89, 0.2);
+            color: #e8f5e8;
+            border: 2px solid rgba(74, 124, 89, 0.6);
+        }
+        
+        .censored-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                #000000,
+                #000000 8px,
+                #1a1a1a 8px,
+                #1a1a1a 16px
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #4a7c59;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+        
+        .censored-overlay:hover {
+            background: repeating-linear-gradient(
+                45deg,
+                #0d0d0d,
+                #0d0d0d 8px,
+                #262626 8px,
+                #262626 16px
+            );
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+        }
+        
+        .user-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(74, 124, 89, 0.5);
+            border-radius: 8px;
+            color: #e8f5e8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .user-input:focus {
+            outline: none;
+            border-color: #4a7c59;
+            box-shadow: 0 0 15px rgba(74, 124, 89, 0.4);
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #4a7c59, #5d8a6b);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.5);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button.reveal-btn {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            margin-right: 15px;
+        }
+        
+        .button.next-btn {
+            background: linear-gradient(135deg, #5d8a6b, #4a7c59);
+        }
+        
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .completion-screen {
+            text-align: center;
+            padding: 50px;
+            background: rgba(74, 124, 89, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(74, 124, 89, 0.3);
+        }
+        
+        .completion-screen h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #4a7c59;
+            margin-bottom: 20px;
+        }
+        
+        .completion-screen p {
+            font-size: 1.3rem;
+            color: #b8d4c0;
+            margin-bottom: 30px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .question-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(74, 124, 89, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            color: #4a7c59;
+            font-weight: 600;
+            border: 1px solid rgba(74, 124, 89, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>MAFIA SICILIA</h1>
+            <p class="subtitle">Mafia Sicilia Postulaciones - Entrevista de ingreso</p>
+            <div class="question-counter">
+                <span id="current-question">1</span> / <span id="total-questions">10</span>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        
+        <div id="interview-container">
+            <div class="video-container">
+                <h3 class="video-title" id="video-title">Clip 1: Situación de Antirol</h3>
+                <iframe id="video-frame" width="100%" height="300" 
+                        src="" 
+                        frameborder="0" 
+                        allowfullscreen
+                        style="border-radius: 10px; border: 2px solid rgba(74, 124, 89, 0.5);">
+                </iframe>
+                <p class="video-info">Observa atentamente la situación y responde qué SITUACION antirol se presenta </p>
+                
+                <div class="answer-section">
+                    <div class="answer-label">Respuesta Correcta:</div>
+                    <div class="censored-answer" id="correct-answer">
+                        <div class="censored-overlay" id="censored-overlay" onclick="revealAnswer()">
+                            🔒 RESPUESTA CENSURADA - CLICK PARA REVELAR
+                        </div>
+                        <div id="answer-content">
+                            SICILIA MANDA!!!
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="button reveal-btn" onclick="revealAnswer()" id="reveal-btn">Revelar Respuesta</button>
+                        <button class="button next-btn" onclick="nextQuestion()" id="next-btn" disabled>Siguiente Pregunta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="completion-screen" class="completion-screen hidden">
+            <h2>🎭 Entrevista finalizada</h2>
+            <p>todas las situaciones fueron presentadas.</p>
+            <p>El entrevistador decidira el resultado final.</p>
+            <button class="button" onclick="restartInterview()">Reiniciar Entrevista</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                title: "Clip 1: Situacion 1",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 2: Situacion 2",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 3: Situacion 3",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 4: Situacion 4",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 5: Situacion 5",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 6: Situacion 6",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 7: Situacion 7",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 8: Situacion 8",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 9: Situacion 9",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"            },
+            {
+                title: "Clip 10: Situacion 10",
+                videoUrl: "https://www.youtube.com/embed/TU_VIDEO_ID_1", // ← AQUÍ
+                answer: "Agrega aquí la respuesta del clip 1"
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let answerRevealed = false;
+        
+        function updateProgress() {
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+        }
+        
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('video-title').textContent = question.title;
+            document.getElementById('answer-content').textContent = question.answer;
+            
+            // Update video source
+            document.getElementById('video-frame').src = question.videoUrl;
+            
+            // Reset censorship
+            document.getElementById('correct-answer').classList.remove('revealed');
+            document.getElementById('censored-overlay').style.display = 'flex';
+            document.getElementById('reveal-btn').disabled = false;
+            document.getElementById('next-btn').disabled = true;
+            answerRevealed = false;
+            
+            updateProgress();
+        }
+        
+        function revealAnswer() {
+            if (!answerRevealed) {
+                document.getElementById('censored-overlay').style.display = 'none';
+                document.getElementById('correct-answer').classList.add('revealed');
+                document.getElementById('reveal-btn').disabled = true;
+                document.getElementById('next-btn').disabled = false;
+                answerRevealed = true;
+            }
+        }
+        
+        function nextQuestion() {
+            if (!answerRevealed) return;
+            
+            currentQuestion++;
+            
+            if (currentQuestion >= questions.length) {
+                // Show completion screen
+                document.getElementById('interview-container').classList.add('hidden');
+                document.getElementById('completion-screen').classList.remove('hidden');
+                document.getElementById('progress-fill').style.width = '100%';
+            } else {
+                loadQuestion();
+            }
+        }
+        
+        function restartInterview() {
+            currentQuestion = 0;
+            document.getElementById('interview-container').classList.remove('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
+            loadQuestion();
+        }
+        
+        // Initialize
+        document.getElementById('total-questions').textContent = questions.length;
+        loadQuestion();
+    </script>
+</body>
+</html>
