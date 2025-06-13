@@ -129,80 +129,101 @@
             z-index: 1;
         }
         
-        .video-thumbnail-container {
+        .video-player-container {
             position: relative;
             width: 100%;
-            height: 300px;
+            max-width: 800px;
+            margin: 0 auto 20px;
             border-radius: 10px;
             overflow: hidden;
-            cursor: pointer;
-            margin-bottom: 20px;
             border: 2px solid rgba(74, 124, 89, 0.5);
-            transition: all 0.3s ease;
+            background: #000;
         }
-
-        .video-thumbnail-container:hover {
-            border-color: #4a7c59;
-            box-shadow: 0 0 20px rgba(74, 124, 89, 0.4);
-        }
-
-        .video-thumbnail {
+        
+        .video-player {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: linear-gradient(45deg, #1a4d1a, #2d5016);
+            height: 450px;
+            background: #000;
+            border: none;
+            outline: none;
         }
-
-        .play-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+        
+        .video-controls {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #4a7c59, #5d8a6b);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
         }
-
-        .video-thumbnail-container:hover .play-overlay {
-            background: rgba(0, 0, 0, 0.4);
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.5);
         }
-
-        .play-button {
-            font-size: 4rem;
-            color: #4a7c59;
-            text-shadow: 0 0 20px rgba(74, 124, 89, 0.8);
-            animation: pulse 2s infinite;
-            margin-bottom: 10px;
+        
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .play-text {
-            color: #e8f5e8;
-            font-size: 1.2rem;
-            font-weight: 600;
+        
+        .file-upload-section {
+            background: rgba(74, 124, 89, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px dashed rgba(74, 124, 89, 0.5);
             text-align: center;
         }
         
-        .video-link {
+        .file-input-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-input-label {
             display: inline-block;
             background: linear-gradient(135deg, #4a7c59, #5d8a6b);
             color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            margin: 10px 0;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
         }
         
-        .video-link:hover {
+        .file-input-label:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(74, 124, 89, 0.5);
+        }
+        
+        .file-status {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #b8d4c0;
         }
         
         .video-info {
@@ -366,13 +387,6 @@
             border: 1px solid rgba(74, 124, 89, 0.3);
         }
 
-        .video-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
         .alert {
             background: rgba(255, 193, 7, 0.2);
             border: 2px solid rgba(255, 193, 7, 0.5);
@@ -381,6 +395,24 @@
             margin-bottom: 20px;
             color: #fff3cd;
             text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(45deg, #1a4d1a, #2d5016);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #4a7c59;
+            font-size: 1.2rem;
+            border-radius: 10px;
+        }
+
+        .video-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -405,22 +437,35 @@
                 <h3 class="video-title" id="video-title">Clip 1: Situación de Antirol</h3>
                 
                 <div class="alert">
-                    ⚠️ Los videos se abren en YouTube. Mira el video y regresa para revelar la respuesta.
+                    📁 Sube el video correspondiente a esta situación desde tus archivos
                 </div>
                 
-                <!-- Thumbnail del video con enlace -->
-                <div class="video-thumbnail-container" id="video-thumbnail">
-                    <img id="video-thumbnail-img" src="" alt="Video thumbnail" class="video-thumbnail">
-                    <div class="play-overlay">
-                        <div class="play-button">▶</div>
-                        <div class="play-text">Click para ver en YouTube</div>
+                <div class="file-upload-section">
+                    <div class="file-input-container">
+                        <input type="file" id="video-file-input" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
+                        <label for="video-file-input" class="file-input-label">
+                            📁 Seleccionar Video
+                        </label>
+                    </div>
+                    <div class="file-status" id="file-status">
+                        Ningún archivo seleccionado
                     </div>
                 </div>
                 
-                <div class="video-options">
-                    <a id="video-link" href="#" target="_blank" class="video-link">
-                        🎥 Ver video en YouTube (Nueva pestaña)
-                    </a>
+                <div class="video-player-container">
+                    <video id="video-player" class="video-player" controls style="display: none;">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div id="video-placeholder" class="video-placeholder">
+                        <div class="video-placeholder-icon">🎬</div>
+                        <div>Selecciona un video para comenzar</div>
+                    </div>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="control-btn" onclick="playVideo()" id="play-btn" disabled>▶️ Reproducir</button>
+                    <button class="control-btn" onclick="pauseVideo()" id="pause-btn" disabled>⏸️ Pausar</button>
+                    <button class="control-btn" onclick="restartVideo()" id="restart-btn" disabled>🔄 Reiniciar</button>
                 </div>
                 
                 <p class="video-info">Observa atentamente la situación y responde qué SITUACION antirol se presenta</p>
@@ -456,67 +501,49 @@
         const questions = [
             {
                 title: "Clip 1: Situacion 1",
-                videoUrl: "https://vm.tiktok.com/ZMSFQ1B85/",
                 answer: "PG + MG + TOXIQUEAR CUERPO + ROLEAR CON CIVILES"
             },
             {
                 title: "Clip 2: Situacion 2",
-                videoId: "TCUH-GU9zPA",
-                videoUrl: "https://youtu.be/TCUH-GU9zPA?si=lpZAuiBzsoGRyoIt",
                 answer: "PG + VDM"
             },
             {
                 title: "Clip 3: Situacion 3",
-                videoId: "OfAxh3vMFEo",
-                videoUrl: "https://youtu.be/OfAxh3vMFEo?si=xan5QygKOYmMpUy4", 
                 answer: "EVADIR ROL"
             },
             {
                 title: "Clip 4: Situacion 4",
-                videoId: "FusHxl_gxoA",
-                videoUrl: "https://youtu.be/FusHxl_gxoA?si=Tk97PYoWGSjOuDKG", 
                 answer: "DM + FORZAR ROL"
             },
             {
                 title: "Clip 5: Situacion 5",
-                videoId: "GLBRRZddr08",
-                videoUrl: "https://youtu.be/GLBRRZddr08?si=nGGi1jwoSDGNtQkn",
                 answer: "CACHEO INAPROPIADO"
             },
             {
                 title: "Clip 6: Situacion 6",
-                videoId: "JEsSzhiXHlM",
-                videoUrl: "https://youtu.be/JEsSzhiXHlM?si=KK_I2KGO9tG30jYD", 
                 answer: "ROLEAR CON CIVILES"
             },
             {
                 title: "Clip 7: Situacion 7",
-                videoId: "4i6Jbx2gKgI",
-                videoUrl: "https://youtu.be/4i6Jbx2gKgI?si=STajgVpGqOccv-Zy", 
                 answer: "TOXIQUEAR CUERPO + DM"
             },
             {
                 title: "Clip 8: Situacion 8",
-                videoId: "YwE0dYtzelE",
-                videoUrl: "https://youtu.be/YwE0dYtzelE?si=u7SvYettrLGsB69H", 
                 answer: "NRRDE + DM"
             },
             {
                 title: "Clip 9: Situacion 9",
-                videoId: "-zaQX3M1Tlk",
-                videoUrl: "https://youtu.be/-zaQX3M1Tlk?si=3cQ4bJwNp9gR4rFb", 
                 answer: "DM MASIVO + NRRDE + METERSE EN ROL AJENO"
             },
             {
                 title: "Clip 10: Situacion 10",
-                videoId: "AW52H9EZoI4",
-                videoUrl: "https://youtu.be/AW52H9EZoI4?si=x2h5nUJJv_0h7xm0", 
                 answer: "CACHEAR SIN VESTIMENTA DE MAFIA"
             }
         ];
         
         let currentQuestion = 0;
         let answerRevealed = false;
+        let currentVideoFile = null;
         
         function updateProgress() {
             const progress = ((currentQuestion) / questions.length) * 100;
@@ -524,8 +551,62 @@
             document.getElementById('current-question').textContent = currentQuestion + 1;
         }
         
-        function getThumbnailUrl(videoId) {
-            return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        function handleVideoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                currentVideoFile = file;
+                const videoPlayer = document.getElementById('video-player');
+                const videoPlaceholder = document.getElementById('video-placeholder');
+                const fileStatus = document.getElementById('file-status');
+                
+                // Crear URL del archivo
+                const videoURL = URL.createObjectURL(file);
+                videoPlayer.src = videoURL;
+                
+                // Mostrar el reproductor y ocultar el placeholder
+                videoPlayer.style.display = 'block';
+                videoPlaceholder.style.display = 'none';
+                
+                // Habilitar controles
+                enableVideoControls();
+                
+                // Actualizar estado del archivo
+                fileStatus.textContent = `✅ ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                fileStatus.style.color = '#4a7c59';
+                
+                // Limpiar URL anterior si existe
+                if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(videoPlayer.src);
+                }
+            }
+        }
+        
+        function enableVideoControls() {
+            document.getElementById('play-btn').disabled = false;
+            document.getElementById('pause-btn').disabled = false;
+            document.getElementById('restart-btn').disabled = false;
+        }
+        
+        function disableVideoControls() {
+            document.getElementById('play-btn').disabled = true;
+            document.getElementById('pause-btn').disabled = true;
+            document.getElementById('restart-btn').disabled = true;
+        }
+        
+        function playVideo() {
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.play();
+        }
+        
+        function pauseVideo() {
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.pause();
+        }
+        
+        function restartVideo() {
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.currentTime = 0;
+            videoPlayer.play();
         }
         
         function loadQuestion() {
@@ -533,17 +614,27 @@
             document.getElementById('video-title').textContent = question.title;
             document.getElementById('answer-content').textContent = question.answer;
             
-            // Configurar thumbnail
-            const thumbnailUrl = getThumbnailUrl(question.videoId);
-            document.getElementById('video-thumbnail-img').src = thumbnailUrl;
+            // Resetear el reproductor de video
+            const videoPlayer = document.getElementById('video-player');
+            const videoPlaceholder = document.getElementById('video-placeholder');
+            const fileStatus = document.getElementById('file-status');
+            const fileInput = document.getElementById('video-file-input');
             
-            // Configurar enlace directo
-            document.getElementById('video-link').href = question.videoUrl;
+            // Limpiar URL anterior
+            if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
+                URL.revokeObjectURL(videoPlayer.src);
+            }
             
-            // Hacer que el thumbnail sea clickeable
-            document.getElementById('video-thumbnail').onclick = function() {
-                window.open(question.videoUrl, '_blank');
-            };
+            videoPlayer.src = '';
+            videoPlayer.style.display = 'none';
+            videoPlaceholder.style.display = 'flex';
+            fileInput.value = '';
+            fileStatus.textContent = 'Ningún archivo seleccionado';
+            fileStatus.style.color = '#b8d4c0';
+            currentVideoFile = null;
+            
+            // Deshabilitar controles
+            disableVideoControls();
             
             // Resetear estado de respuesta
             document.getElementById('correct-answer').classList.remove('revealed');
@@ -586,20 +677,35 @@
             loadQuestion();
         }
         
-        // Detectar errores de carga de thumbnail y usar imagen por defecto
+        // Manejar eventos del reproductor de video
         document.addEventListener('DOMContentLoaded', function() {
-            const thumbnailImg = document.getElementById('video-thumbnail-img');
-            thumbnailImg.addEventListener('error', function() {
-                this.style.display = 'none';
-                this.parentElement.style.background = 'linear-gradient(45deg, #1a4d1a, #2d5016)';
+            const videoPlayer = document.getElementById('video-player');
+            
+            videoPlayer.addEventListener('loadstart', function() {
+                console.log('Cargando video...');
             });
+            
+            videoPlayer.addEventListener('error', function(e) {
+                console.error('Error al cargar el video:', e);
+                alert('Error al cargar el video. Asegúrate de que el archivo sea un formato de video válido.');
+            });
+            
+            videoPlayer.addEventListener('canplay', function() {
+                console.log('Video listo para reproducir');
+            });
+        });
+        
+        // Limpiar URLs de blob cuando se cierra la página
+        window.addEventListener('beforeunload', function() {
+            const videoPlayer = document.getElementById('video-player');
+            if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
+                URL.revokeObjectURL(videoPlayer.src);
+            }
         });
         
         // Inicializar
         document.getElementById('total-questions').textContent = questions.length;
         loadQuestion();
     </script>
-</body>
-</html>
 </body>
 </html>
