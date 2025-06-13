@@ -17,7 +17,7 @@
             font-family: 'Crimson Text', serif;
             background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #2d2d2d);
             min-height: 100vh;
-            color: #d4af37;
+            color: #4CAF50;
             overflow-x: hidden;
             position: relative;
         }
@@ -30,8 +30,8 @@
             height: 100%;
             opacity: 0.05;
             background-image: 
-                radial-gradient(circle at 25% 25%, #d4af37 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, #b8860b 0%, transparent 50%);
+                radial-gradient(circle at 25% 25%, #4CAF50 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #2E7D32 0%, transparent 50%);
             background-size: 150px 150px;
             z-index: -2;
         }
@@ -47,8 +47,8 @@
                     45deg,
                     transparent,
                     transparent 2px,
-                    rgba(212, 175, 55, 0.02) 2px,
-                    rgba(212, 175, 55, 0.02) 4px
+                    rgba(76, 175, 80, 0.02) 2px,
+                    rgba(76, 175, 80, 0.02) 4px
                 );
             z-index: -1;
         }
@@ -68,15 +68,15 @@
         }
         
         .logo-container {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             margin: 0 auto 20px;
             position: relative;
             border-radius: 50%;
-            background: linear-gradient(135deg, #d4af37, #b8860b);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
             padding: 3px;
             box-shadow: 
-                0 0 30px rgba(212, 175, 55, 0.4),
+                0 0 30px rgba(76, 175, 80, 0.4),
                 inset 0 0 20px rgba(0, 0, 0, 0.3);
         }
         
@@ -92,14 +92,12 @@
             overflow: hidden;
         }
         
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: #d4af37;
-            text-align: center;
-            line-height: 1.1;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        .logo-image {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.2);
         }
         
         .header::before {
@@ -110,17 +108,17 @@
             transform: translateX(-50%);
             width: 300px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, #d4af37, #b8860b, #d4af37, transparent);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(90deg, transparent, #4CAF50, #2E7D32, #4CAF50, transparent);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
         }
         
         .header h1 {
             font-family: 'Cinzel', serif;
             font-size: 4rem;
             font-weight: 700;
-            color: #d4af37;
+            color: #4CAF50;
             text-shadow: 
-                0 0 20px rgba(212, 175, 55, 0.8),
+                0 0 20px rgba(76, 175, 80, 0.8),
                 2px 2px 4px rgba(0, 0, 0, 0.8);
             margin-bottom: 10px;
             letter-spacing: 3px;
@@ -137,13 +135,13 @@
         }
         
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
-            to { text-shadow: 0 0 20px rgba(212, 175, 55, 1); }
+            from { text-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
+            to { text-shadow: 0 0 20px rgba(76, 175, 80, 1); }
         }
         
         .header .subtitle {
             font-size: 1.4rem;
-            color: #b8860b;
+            color: #2E7D32;
             font-style: italic;
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -152,11 +150,11 @@
         
         .famiglia-motto {
             font-size: 1.1rem;
-            color: #8b7355;
+            color: #388E3C;
             font-style: italic;
             margin-top: 15px;
             padding: 10px 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.3);
             border-radius: 20px;
             background: rgba(0, 0, 0, 0.3);
             display: inline-block;
@@ -171,16 +169,16 @@
             margin-bottom: 30px;
             box-shadow: 
                 inset 0 2px 4px rgba(0,0,0,0.5),
-                0 0 10px rgba(212, 175, 55, 0.2);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+                0 0 10px rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #d4af37, #b8860b, #d4af37);
+            background: linear-gradient(90deg, #4CAF50, #2E7D32, #4CAF50);
             width: 0%;
             transition: width 0.5s ease;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
             position: relative;
         }
         
@@ -205,13 +203,13 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            border: 2px solid rgba(212, 175, 55, 0.4);
+            border: 2px solid rgba(76, 175, 80, 0.4);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(212, 175, 55, 0.2);
+                inset 0 1px 0 rgba(76, 175, 80, 0.2);
         }
         
         .video-container::before {
@@ -221,7 +219,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
             transition: left 0.8s ease;
         }
         
@@ -232,7 +230,7 @@
         .video-title {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
-            color: #d4af37;
+            color: #4CAF50;
             margin-bottom: 20px;
             text-align: center;
             position: relative;
@@ -252,11 +250,11 @@
             margin: 0 auto 20px;
             border-radius: 12px;
             overflow: hidden;
-            border: 3px solid rgba(212, 175, 55, 0.6);
+            border: 3px solid rgba(76, 175, 80, 0.6);
             background: #000;
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.6),
-                0 0 20px rgba(212, 175, 55, 0.3);
+                0 0 20px rgba(76, 175, 80, 0.3);
         }
         
         .video-player {
@@ -276,7 +274,7 @@
         }
         
         .control-btn {
-            background: linear-gradient(135deg, #d4af37, #b8860b);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
             color: #000;
             border: none;
             padding: 12px 24px;
@@ -286,7 +284,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 
-                0 4px 15px rgba(212, 175, 55, 0.4),
+                0 4px 15px rgba(76, 175, 80, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             font-family: 'Cinzel', serif;
             text-transform: uppercase;
@@ -296,9 +294,9 @@
         .control-btn:hover {
             transform: translateY(-3px);
             box-shadow: 
-                0 6px 20px rgba(212, 175, 55, 0.6),
+                0 6px 20px rgba(76, 175, 80, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, #f4d03f, #d4af37);
+            background: linear-gradient(135deg, #66BB6A, #4CAF50);
         }
         
         .control-btn:active {
@@ -313,22 +311,22 @@
         
         .video-info {
             font-size: 1.2rem;
-            color: #b8860b;
+            color: #2E7D32;
             text-align: center;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(76, 175, 80, 0.1);
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.3);
             font-style: italic;
         }
         
         .answer-section {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(184, 134, 11, 0.1));
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 125, 50, 0.1));
             border-radius: 10px;
             padding: 25px;
             margin-top: 20px;
-            border: 2px solid rgba(212, 175, 55, 0.4);
+            border: 2px solid rgba(76, 175, 80, 0.4);
             position: relative;
         }
         
@@ -339,7 +337,7 @@
             left: -1px;
             right: -1px;
             bottom: -1px;
-            background: linear-gradient(45deg, #d4af37, #b8860b, #d4af37);
+            background: linear-gradient(45deg, #4CAF50, #2E7D32, #4CAF50);
             border-radius: 10px;
             z-index: -1;
             opacity: 0.3;
@@ -347,7 +345,7 @@
         
         .answer-label {
             font-size: 1.3rem;
-            color: #d4af37;
+            color: #4CAF50;
             margin-bottom: 20px;
             font-weight: 600;
             display: flex;
@@ -371,16 +369,16 @@
             color: #666;
             font-size: 1.2rem;
             line-height: 1.6;
-            border: 2px dashed rgba(212, 175, 55, 0.6);
+            border: 2px dashed rgba(76, 175, 80, 0.6);
             position: relative;
             overflow: hidden;
             min-height: 80px;
         }
         
         .censored-answer.revealed {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 134, 11, 0.2));
-            color: #d4af37;
-            border: 2px solid rgba(212, 175, 55, 0.8);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.2));
+            color: #4CAF50;
+            border: 2px solid rgba(76, 175, 80, 0.8);
             font-weight: 600;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
@@ -399,12 +397,12 @@
                     #1a1a1a 8px,
                     #1a1a1a 16px
                 ),
-                linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(184, 134, 11, 0.1));
+                linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 125, 50, 0.1));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            color: #d4af37;
+            color: #4CAF50;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -423,13 +421,13 @@
                     #262626 8px,
                     #262626 16px
                 ),
-                linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 134, 11, 0.2));
+                linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.2));
             box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
-            color: #f4d03f;
+            color: #66BB6A;
         }
         
         .button {
-            background: linear-gradient(135deg, #d4af37, #b8860b);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
             color: #000;
             padding: 15px 35px;
             border: none;
@@ -441,7 +439,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 
-                0 4px 15px rgba(212, 175, 55, 0.4),
+                0 4px 15px rgba(76, 175, 80, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             font-family: 'Cinzel', serif;
             position: relative;
@@ -466,9 +464,9 @@
         .button:hover {
             transform: translateY(-3px);
             box-shadow: 
-                0 6px 20px rgba(212, 175, 55, 0.6),
+                0 6px 20px rgba(76, 175, 80, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, #f4d03f, #d4af37);
+            background: linear-gradient(135deg, #66BB6A, #4CAF50);
         }
         
         .button:active {
@@ -476,7 +474,7 @@
         }
         
         .button.reveal-btn {
-            background: linear-gradient(135deg, #b8860b, #8b7355);
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
             margin-right: 15px;
         }
         
@@ -485,7 +483,7 @@
         }
         
         .button.next-btn {
-            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
         }
         
         .button.next-btn::before {
@@ -501,9 +499,9 @@
         .completion-screen {
             text-align: center;
             padding: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(184, 134, 11, 0.1));
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 125, 50, 0.1));
             border-radius: 15px;
-            border: 3px solid rgba(212, 175, 55, 0.5);
+            border: 3px solid rgba(76, 175, 80, 0.5);
             position: relative;
             overflow: hidden;
         }
@@ -515,7 +513,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
             animation: rotate 10s linear infinite;
         }
         
@@ -527,7 +525,7 @@
         .completion-screen h2 {
             font-family: 'Cinzel', serif;
             font-size: 3rem;
-            color: #d4af37;
+            color: #4CAF50;
             margin-bottom: 25px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             position: relative;
@@ -536,7 +534,7 @@
         
         .completion-screen p {
             font-size: 1.4rem;
-            color: #b8860b;
+            color: #2E7D32;
             margin-bottom: 30px;
             position: relative;
             z-index: 1;
@@ -550,14 +548,14 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 134, 11, 0.2));
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.2));
             padding: 12px 25px;
             border-radius: 25px;
             font-size: 1.2rem;
-            color: #d4af37;
+            color: #4CAF50;
             font-weight: 700;
-            border: 2px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(76, 175, 80, 0.5);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
             font-family: 'Cinzel', serif;
         }
 
@@ -595,8 +593,8 @@
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            color: #d4af37;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #4CAF50;
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
         }
@@ -609,14 +607,14 @@
             background: rgba(0, 0, 0, 0.95);
             padding: 30px;
             border-radius: 15px;
-            border: 3px solid #d4af37;
-            color: #d4af37;
+            border: 3px solid #4CAF50;
+            color: #4CAF50;
             text-align: center;
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             max-width: 500px;
             z-index: 1000;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 50px rgba(76, 175, 80, 0.5);
             display: none;
         }
         
@@ -643,14 +641,16 @@
         <div class="header">
             <div class="logo-container">
                 <div class="logo-inner">
-                    <div class="logo-text">
-                        MAFIA<br>61<br>SICILIA<br>TOP🥇
-                    </div>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" 
+                         alt="MAFIA 61 SICILIA LOGO" 
+                         class="logo-image" 
+                         id="mafia-logo"
+                         style="background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTUiIGZpbGw9IiMwMDAiIHN0cm9rZT0iIzRDQUY1MCIgc3Ryb2tlLXdpZHRoPSI0Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJDaW56ZWwiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM0Q0FGNTBIIGR1bT0ibGlnaHRHcmVlbiI+XYB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NQUZJQTwvdGV4dD4KPHR0ZXh0IHg9IjEwMCIgeT0iOTAiIGZvbnQtZmFtaWx5PSJDaW56ZWwiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM0Q0FGNTB1dg0iIHRleHQtYW5jaG9yPSJtaWRkbGUiPjYxPC90ZXh0Pgo8dGV4dCB4PSIxMDAiIHk9IjEyNSIaZm9udC1mYW1pbHk9IkNpbnplbCaGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiM0Q0FGNTB9dDY0dGV4dC1hbmNob3I9Im1pZGRsZSI+U0lDSUxJQTwvdGV4dD4KPHRleHQgeD0iMTAwIiB5PSIxNTUiIGZvbnQtZmFtaWx5PSJDaW56ZWwiaEYyG9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzRDQUY1MCKJdGV4dC1hbmNob3I9Im1pZGRsZSI+TUFOREE8L3RleHQ+Cjx0ZXh0IHg9IjE1MCIgeT0iNjAiIGZvbnQtc2l6ZT0iMzAiPvCfkocvdGV4dD4KPC9zdmc+')" />
                 </div>
             </div>
             <h1>MAFIA SICILIA</h1>
             <p class="subtitle">Mafia Sicilia Postulaciones - Entrevista de ingreso</p>
-            <div class="familia-sicilia">"SICILIA MANDA"</div>
+            <div class="famiglia-motto">"SICILIA MANDA"</div>
             <div class="question-counter">
                 <span id="current-question">1</span> / <span id="total-questions">10</span>
             </div>
