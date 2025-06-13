@@ -437,28 +437,23 @@
                 <h3 class="video-title" id="video-title">Clip 1: Situación de Antirol</h3>
                 
                 <div class="alert">
-                    📁 Sube el video correspondiente a esta situación desde tus archivos
-                </div>
+              </div>
                 
                 <div class="file-upload-section">
                     <div class="file-input-container">
                         <input type="file" id="video-file-input" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
                         <label for="video-file-input" class="file-input-label">
-                            📁 Seleccionar Video
                         </label>
                     </div>
-                    <div class="file-status" id="file-status">
-                        Ningún archivo seleccionado
                     </div>
                 </div>
                 
                 <div class="video-player-container">
                     <video id="video-player" class="video-player" controls style="display: none;">
-                        Tu navegador no soporta el elemento de video.
                     </video>
                     <div id="video-placeholder" class="video-placeholder">
                         <div class="video-placeholder-icon">🎬</div>
-                        <div>Selecciona un video para comenzar</div>
+                        <div></div>
                     </div>
                 </div>
                 
@@ -501,6 +496,7 @@
         const questions = [
             {
                 title: "Clip 1: Situacion 1",
+                videoUrl: 
                 answer: "PG + MG + TOXIQUEAR CUERPO + ROLEAR CON CIVILES"
             },
             {
