@@ -179,53 +179,6 @@
             transform: none;
         }
         
-        .file-upload-section {
-            background: rgba(74, 124, 89, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 2px dashed rgba(74, 124, 89, 0.5);
-            text-align: center;
-        }
-        
-        .file-input-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        
-        .file-input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-        
-        .file-input-label {
-            display: inline-block;
-            background: linear-gradient(135deg, #4a7c59, #5d8a6b);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
-        }
-        
-        .file-input-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.5);
-        }
-        
-        .file-status {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #b8d4c0;
-        }
-        
         .video-info {
             font-size: 1.1rem;
             color: #b8d4c0;
@@ -387,32 +340,15 @@
             border: 1px solid rgba(74, 124, 89, 0.3);
         }
 
-        .alert {
-            background: rgba(255, 193, 7, 0.2);
-            border: 2px solid rgba(255, 193, 7, 0.5);
+        .video-error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 2px solid rgba(220, 53, 69, 0.5);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
-            color: #fff3cd;
+            color: #f8d7da;
             text-align: center;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 450px;
-            background: linear-gradient(45deg, #1a4d1a, #2d5016);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #4a7c59;
-            font-size: 1.2rem;
-            border-radius: 10px;
-        }
-
-        .video-placeholder-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
+            display: none;
         }
     </style>
 </head>
@@ -437,6 +373,22 @@
                 <h3 class="video-title" id="video-title">Clip 1: Situación de Antirol</h3>
                 
                 <p class="video-info">Observa atentamente la situación y responde qué SITUACION antirol se presenta</p>
+                
+                <div class="video-error" id="video-error">
+                    ⚠️ Error al cargar el video. Verifica que el archivo existe en la carpeta del proyecto.
+                </div>
+                
+                <div class="video-player-container">
+                    <video class="video-player" id="video-player" controls>
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="control-btn" id="play-btn" onclick="playVideo()">▶️ Reproducir</button>
+                    <button class="control-btn" id="pause-btn" onclick="pauseVideo()">⏸️ Pausar</button>
+                    <button class="control-btn" id="restart-btn" onclick="restartVideo()">🔄 Reiniciar</button>
+                </div>
                 
                 <div class="answer-section">
                     <div class="answer-label">Respuesta Correcta:</div>
@@ -521,7 +473,6 @@
         
         let currentQuestion = 0;
         let answerRevealed = false;
-        let currentVideoFile = null;
         
         function updateProgress() {
             const progress = ((currentQuestion) / questions.length) * 100;
@@ -529,51 +480,11 @@
             document.getElementById('current-question').textContent = currentQuestion + 1;
         }
         
-        function handleVideoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                currentVideoFile = file;
-                const videoPlayer = document.getElementById('video-player');
-                const videoPlaceholder = document.getElementById('video-placeholder');
-                const fileStatus = document.getElementById('file-status');
-                
-                // Crear URL del archivo
-                const videoURL = URL.createObjectURL(file);
-                videoPlayer.src = videoURL;
-                
-                // Mostrar el reproductor y ocultar el placeholder
-                videoPlayer.style.display = 'block';
-                videoPlaceholder.style.display = 'none';
-                
-                // Habilitar controles
-                enableVideoControls();
-                
-                // Actualizar estado del archivo
-                fileStatus.textContent = `✅ ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-                fileStatus.style.color = '#4a7c59';
-                
-                // Limpiar URL anterior si existe
-                if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
-                    URL.revokeObjectURL(videoPlayer.src);
-                }
-            }
-        }
-        
-        function enableVideoControls() {
-            document.getElementById('play-btn').disabled = false;
-            document.getElementById('pause-btn').disabled = false;
-            document.getElementById('restart-btn').disabled = false;
-        }
-        
-        function disableVideoControls() {
-            document.getElementById('play-btn').disabled = true;
-            document.getElementById('pause-btn').disabled = true;
-            document.getElementById('restart-btn').disabled = true;
-        }
-        
         function playVideo() {
             const videoPlayer = document.getElementById('video-player');
-            videoPlayer.play();
+            videoPlayer.play().catch(e => {
+                console.error('Error al reproducir video:', e);
+            });
         }
         
         function pauseVideo() {
@@ -584,35 +495,23 @@
         function restartVideo() {
             const videoPlayer = document.getElementById('video-player');
             videoPlayer.currentTime = 0;
-            videoPlayer.play();
+            videoPlayer.play().catch(e => {
+                console.error('Error al reiniciar video:', e);
+            });
         }
         
         function loadQuestion() {
             const question = questions[currentQuestion];
+            const videoPlayer = document.getElementById('video-player');
+            const videoError = document.getElementById('video-error');
+            
+            // Actualizar título y respuesta
             document.getElementById('video-title').textContent = question.title;
             document.getElementById('answer-content').textContent = question.answer;
             
-            // Resetear el reproductor de video
-            const videoPlayer = document.getElementById('video-player');
-            const videoPlaceholder = document.getElementById('video-placeholder');
-            const fileStatus = document.getElementById('file-status');
-            const fileInput = document.getElementById('video-file-input');
-            
-            // Limpiar URL anterior
-            if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
-                URL.revokeObjectURL(videoPlayer.src);
-            }
-            
-            videoPlayer.src = '';
-            videoPlayer.style.display = 'none';
-            videoPlaceholder.style.display = 'flex';
-            fileInput.value = '';
-            fileStatus.textContent = 'Ningún archivo seleccionado';
-            fileStatus.style.color = '#b8d4c0';
-            currentVideoFile = null;
-            
-            // Deshabilitar controles
-            disableVideoControls();
+            // Cargar video
+            videoPlayer.src = question.videoUrl;
+            videoError.style.display = 'none';
             
             // Resetear estado de respuesta
             document.getElementById('correct-answer').classList.remove('revealed');
@@ -658,27 +557,27 @@
         // Manejar eventos del reproductor de video
         document.addEventListener('DOMContentLoaded', function() {
             const videoPlayer = document.getElementById('video-player');
+            const videoError = document.getElementById('video-error');
             
             videoPlayer.addEventListener('loadstart', function() {
                 console.log('Cargando video...');
+                videoError.style.display = 'none';
             });
             
             videoPlayer.addEventListener('error', function(e) {
                 console.error('Error al cargar el video:', e);
-                alert('Error al cargar el video. Asegúrate de que el archivo sea un formato de video válido.');
+                videoError.style.display = 'block';
+                videoError.innerHTML = `⚠️ Error al cargar: ${questions[currentQuestion].videoUrl}`;
             });
             
             videoPlayer.addEventListener('canplay', function() {
                 console.log('Video listo para reproducir');
+                videoError.style.display = 'none';
             });
-        });
-        
-        // Limpiar URLs de blob cuando se cierra la página
-        window.addEventListener('beforeunload', function() {
-            const videoPlayer = document.getElementById('video-player');
-            if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
-                URL.revokeObjectURL(videoPlayer.src);
-            }
+            
+            videoPlayer.addEventListener('loadedmetadata', function() {
+                console.log('Metadatos del video cargados');
+            });
         });
         
         // Inicializar
